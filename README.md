@@ -1,46 +1,51 @@
-# TrueLens - Authentic News with Stellar
+# Stellar Consensus News - Authentic News for Better Trades
 
 ## Overview
 
-TrueLens is a decentralized platform that solves the authenticity crisis in news media, helping users make informed decisions based on verified information. Using Stellar's smart contracts, passkeys for authentication, and a seamless web3 user experience, TrueLens demonstrates that web3 UX doesn't have to suck.
+Stellar Consensus News is a decentralized platform that solves the authenticity crisis in news media, helping users make informed trading decisions based on verified information. In today's market, especially during periods of high volatility, news drives significant market movements. Our application uses Stellar's blockchain technology, AI agents, and community verification to ensure only authentic news reaches traders, all with a seamless web2-like UX experience.
 
 ## Problem Statement
 
-News has become a driving force for market movements and public opinion:
-- Fake news leads to misled decisions and potential financial losses
-- Traditional web3 authentication is complicated and user-unfriendly
-- Current news verification lacks transparent and accessible mechanisms
+Under the current political climate, news has become a driving force for market movements:
+- The VIX has skyrocketed to COVID-era levels
+- Fake news leads to misled trading decisions and potential financial losses
+- Lack of verification mechanisms for news from multiple sources
+- Traditional blockchain solutions have poor UX with complicated wallet integrations
 
 ## Solution
 
-TrueLens provides a three-pronged approach:
+Stellar Consensus News provides a three-pronged approach:
 
-1. **AI-Powered News Aggregation**: AI agents scrape data from multiple sources to collect and analyze news items.
+1. **AI-Powered News Aggregation**: AI agents scrape data from multiple sources (TruthSocial, X, YouTube, etc.) to collect and analyze news items.
 
-2. **Decentralized Verification with Stellar Smart Contracts**: 
-   - Community members use passkeys to participate in news verification
+2. **Decentralized Verification with Seamless UX**: 
+   - Community members stake XLM to participate in news verification
+   - No wallet integration required - use passkeys for authentication
    - Verified news (90%+ consensus) appears in users' feeds
    - Community flagging system to remove later-identified fake news
    - XLM rewards for accurate verifiers, with a level-based reward system
 
-3. **Stellar Passkeys for Seamless Web3 UX**:
-   - No wallet integration required - use passkeys for authentication
-   - Transaction signing using familiar device biometrics (Face ID, fingerprint)
-   - Frictionless onboarding process with minimal steps
+3. **Trading Insights**:
+   - AI summarization of verified news
+   - Trading suggestions based on verified information
+   - Market sentiment analysis
+   - Personalized feeds tailored to user interests
 
 ## Architecture
 
-### Stellar Blockchain Infrastructure
+### Blockchain Infrastructure
 
-- **Stellar Smart Contracts**: Primary mechanism for verification and rewards
-  - TrueLensVerification: Smart contract for news verification
-  - TrueLensRewards: Smart contract for distributing XLM rewards
+- **Stellar Blockchain**: Primary chain for verification and XLM rewards
+  - VerificationContract: Smart contract for news verification
+  - NewsRegistry: Smart contract for storing verified news hashes
+  - RewardsDistribution: Smart contract for distributing XLM rewards
 
-- **Passkeys Integration**: Seamless authentication using device biometrics
-  - Leverages Stellar Passkey Kit for wallet creation and management
-  - No seed phrases or private keys for users to manage
+### Authentication
 
-- **Launchtube**: Used for transaction fee sponsorship to improve UX
+- **Stellar Passkeys**: Web3 authentication without wallet complexity
+  - Face ID/fingerprint authentication
+  - No seed phrases to remember
+  - Transaction signing with biometrics
 
 ### Storage
 
@@ -52,7 +57,8 @@ TrueLens provides a three-pronged approach:
 - Modern, clean UI built with Next.js and Tailwind CSS
 - Feed page displaying verified news with sources
 - Profile page showing user level, benefits, and token balance
-- Verification marketplace for earning XLM rewards
+- Verification marketplace for staking and earning
+- Leverages Stellar Passkey Kit for wallet creation and management
 
 ## Token Economics
 
@@ -61,20 +67,17 @@ TrueLens provides a three-pronged approach:
 - **Reward Distribution**:
   - Tokens distributed to accurate verifiers
   - Higher rewards for higher-level users
-  - Pool system for fair distribution
-- **Level System**:
-  - Users level up based on verification accuracy
-  - Higher levels unlock additional benefits
+  - Launchtube integration for seamless fee payment
 
 ## Getting Started
 
 ### Backend Setup
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/truelens.git
+git clone https://github.com/your-org/stellar-consensus-news.git
 
 # Navigate to backend directory
-cd truelens_backend
+cd stellar-consensus-news/backend
 
 # Install dependencies
 npm install
@@ -83,14 +86,14 @@ npm install
 cp .env.example .env
 # Edit .env with your configuration
 
-# Deploy contracts to Stellar Testnet
-npm run deploy:stellar
+# Deploy contracts
+npm run deploy:stellar-testnet
 ```
 
 ### Frontend Setup
 ```bash
 # Navigate to UI directory
-cd truelens_UI
+cd ../truelens_UI
 
 # Install dependencies
 npm install
@@ -101,15 +104,15 @@ npm run dev
 
 ## Project Status
 
-TrueLens is currently in development, with the following components in progress:
-- Stellar smart contracts deployment
-- Passkeys integration for authentication
+Stellar Consensus News is currently in development, with the following components in progress:
+- Stellar smart contracts
+- Passkey authentication system
 - AI agents for news verification
 - UI implementation with web2-like UX
 
 ## Contributing
 
-We welcome contributions to the TrueLens project. Please see our contributing guidelines for more information.
+We welcome contributions to the Stellar Consensus News project. Please see our contributing guidelines for more information.
 
 ## License
 
@@ -117,9 +120,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgments
 
-TrueLens is being developed as part of the Stellar Consensus Hackathon 2025, targeting the "Web3 UX doesn't have to suck" track.
-
-This project leverages the following Stellar technologies:
-- Stellar SDK
-- Passkey Kit for authentication
-- Launchtube for transaction sponsorship
+Stellar Consensus News is being developed for the Stellar Consensus Hackathon 2025, targeting the "Web3 UX doesn't have to suck" challenge.

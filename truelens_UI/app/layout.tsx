@@ -8,10 +8,10 @@ import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import Navbar from "@/components/layout/navbar";
 
 export const metadata = {
-  title: "TrueLens - Verified News on Stellar",
+  title: "Stellar Consensus News - Verified News for Better Trading",
   description:
-    "TrueLens is a platform for verifying news from multiple sources using Stellar's smart contracts and passkeys for a seamless web3 experience.",
-  metadataBase: new URL("https://truelens.vercel.app"),
+    "Stellar Consensus News is a platform for verifying news from multiple sources to help you make better trading decisions, powered by Stellar blockchain.",
+  metadataBase: new URL("https://stellar-consensus.vercel.app"),
 };
 
 export default async function RootLayout({
