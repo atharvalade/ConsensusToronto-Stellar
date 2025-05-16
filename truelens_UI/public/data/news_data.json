@@ -1,0 +1,350 @@
+[
+  {
+    "title": "UK Economy Surges 0.7% in Q1, Leading G7 Growth",
+    "oneLineTitle": "UK Leads G7 with 0.7% Q1 Growth",
+    "url": "https://www.theguardian.com/business/live/2025/may/15/uk-gdp-economy-growth-q1-2025-rachel-reeves-stock-markets-pound-business-live-news",
+    "imageUrl": "https://i.guim.co.uk/img/media/1e3f4e2f3e6b4e8a8b8f8e8e8e8e8e8e8e8e8e8e/0_0_3000_2000/master/3000.jpg",
+    "sourceName": "The Guardian",
+    "sourceLogoUrl": "https://assets.guim.co.uk/images/favicons/32x32.png",
+    "publishedAt": "2025-05-15T12:00:00Z",
+    "summary": "The UK economy grew by 0.7% in the first quarter of 2025, marking its fastest quarterly growth rate in a year and positioning it as the top performer among G7 nations. Growth was driven by the services and production sectors, with exports—particularly to the US—rising significantly ahead of Donald Trump’s new tariff regime.\n\nDespite the positive data, economists caution that the growth surge may not last due to impending economic headwinds and global trade tensions. While the Labour government celebrated the results as validation of its economic policies, rising mortgage repossessions and defaults on utility payments indicate continued financial stress for households.",
+    "factualRating": 5,
+    "biasRating": "Center",
+    "tradingInsights": [
+      {
+        "ticker": "EWU",
+        "insight": "Strong UK economic growth boosts investor confidence in UK equities.",
+        "sentiment": "positive"
+      },
+      {
+        "ticker": "GBPUSD",
+        "insight": "Robust GDP figures strengthen the British pound against the US dollar.",
+        "sentiment": "positive"
+      },
+      {
+        "ticker": "VOD",
+        "insight": "Improved economic conditions may lead to increased consumer spending, benefiting telecom companies like Vodafone.",
+        "sentiment": "positive"
+      }
+    ]
+  },
+  {
+    "title": "Sudan's Civil War Escalates with Drone Attacks on Port Sudan",
+    "oneLineTitle": "Sudan Conflict Intensifies with Drone Strikes",
+    "url": "https://www.thetimes.co.uk/article/drone-attacks-on-port-open-new-chapter-in-sudans-brutal-civil-war-0nvppxtqg",
+    "imageUrl": "https://www.thetimes.co.uk/images/port-sudan-drone-attack.jpg",
+    "sourceName": "The Times",
+    "sourceLogoUrl": "https://www.thetimes.co.uk/images/favicons/apple-touch-icon.png",
+    "publishedAt": "2025-05-15T08:00:00Z",
+    "summary": "Sudan’s civil war has escalated with the Rapid Support Forces (RSF) launching drone attacks on Port Sudan, a previously unaffected strategic city on the Red Sea coast. This shift follows the RSF's expulsion from Khartoum and marks a significant new phase in the two-year conflict with the Sudanese army.\n\nPort Sudan had served as a hub for government and humanitarian operations but is now experiencing infrastructure damage, power outages, and water shortages due to targeted drone strikes. Analysts suggest the RSF is adopting a new war strategy, raising regional security concerns, particularly for Red Sea navigation.",
+    "factualRating": 5,
+    "biasRating": "Center",
+    "tradingInsights": [
+      {
+        "ticker": "BDRY",
+        "insight": "Disruption in Red Sea shipping routes may lead to increased shipping rates, benefiting dry bulk shipping ETFs.",
+        "sentiment": "positive"
+      },
+      {
+        "ticker": "XOM",
+        "insight": "Heightened conflict in the region could lead to oil supply concerns, potentially increasing oil prices and benefiting ExxonMobil.",
+        "sentiment": "positive"
+      },
+      {
+        "ticker": "LMT",
+        "insight": "Escalation in conflicts may boost demand for defense equipment, positively impacting Lockheed Martin.",
+        "sentiment": "positive"
+      }
+    ]
+  },
+  {
+    "title": "California Halts Health Coverage Expansion for Undocumented Immigrants",
+    "oneLineTitle": "California Cuts Health Coverage Expansion",
+    "url": "https://nymag.com/intelligencer/article/newsom-california-progressivism.html",
+    "imageUrl": "https://nymag.com/images/newsom-healthcare.jpg",
+    "sourceName": "New York Magazine",
+    "sourceLogoUrl": "https://nymag.com/favicon.ico",
+    "publishedAt": "2025-05-15T10:30:00Z",
+    "summary": "California Governor Gavin Newsom has announced a significant policy shift that marks a potential end to the state’s recent progressive era. Due to budget constraints and economic uncertainties, Newsom plans to halt future enrollment of low-income undocumented immigrants in California's state-funded healthcare program starting in 2026.\n\nAdditionally, current enrollees will be required to pay monthly premiums starting in 2027. This move reflects the financial unsustainability of California’s ambitious Medi-Cal expansion, which exceeded its cost estimates by $2.7 billion.",
+    "factualRating": 5,
+    "biasRating": "Center-Left",
+    "tradingInsights": [
+      {
+        "ticker": "UNH",
+        "insight": "Reduction in state-funded healthcare may lead to increased enrollment in private health insurance plans, benefiting UnitedHealth Group.",
+        "sentiment": "positive"
+      },
+      {
+        "ticker": "ANTM",
+        "insight": "Policy changes could drive more individuals to seek private insurance, positively impacting Anthem's market share.",
+        "sentiment": "positive"
+      },
+      {
+        "ticker": "HCA",
+        "insight": "Hospitals may face increased uncompensated care costs due to reduced coverage, potentially impacting HCA Healthcare negatively.",
+        "sentiment": "negative"
+      }
+    ]
+  },
+  {
+    "title": "UAE to Build Largest AI Campus Outside US in Deal with Trump Administration",
+    "oneLineTitle": "UAE Plans Massive AI Campus with US Deal",
+    "url": "https://www.reuters.com/technology/uae-build-biggest-ai-campus-outside-us-trump-deal-2025-05-15/",
+    "imageUrl": "https://www.reuters.com/images/uae-ai-campus.jpg",
+    "sourceName": "Reuters",
+    "sourceLogoUrl": "https://www.reuters.com/pf/resources/images/reuters/logo-vertical-2x.png",
+    "publishedAt": "2025-05-15T09:00:00Z",
+    "summary": "The United Arab Emirates and the United States have signed an agreement for the Gulf country to build the largest artificial intelligence campus outside the United States. This deal, previously hindered by concerns over technology access by China, marks a significant step in US-UAE tech collaboration.\n\nThe campus aims to foster AI research and development, attracting global talent and investment. The agreement reflects a strategic move to strengthen technological ties between the two nations and counterbalance China's influence in the AI sector.",
+    "factualRating": 5,
+    "biasRating": "Center",
+    "tradingInsights": [
+      {
+        "ticker": "MSFT",
+        "insight": "Expansion of AI infrastructure in the UAE may lead to increased demand for Microsoft's cloud and AI services.",
+        "sentiment": "positive"
+      },
+      {
+        "ticker": "GOOGL",
+        "insight": "Google could benefit from partnerships and service provisions in the new AI campus, enhancing its global AI footprint.",
+        "sentiment": "positive"
+      },
+      {
+        "ticker": "NVDA",
+        "insight": "Construction of a large AI campus is likely to boost demand for NVIDIA's AI chips and hardware.",
+        "sentiment": "positive"
+      }
+    ]
+  },
+  {
+    "title": "Study Links Persistent Fatigue to Mini-Strokes",
+    "oneLineTitle": "Mini-Strokes May Cause Long-Term Fatigue",
+    "url": "https://nypost.com/2025/05/15/health/tired-all-the-time-it-may-be-this-silent-serious-health-issue/",
+    "imageUrl": "https://nypost.com/wp-content/uploads/sites/2/2025/05/mini-stroke-fatigue.jpg",
+    "sourceName": "New York Post",
+    "sourceLogoUrl": "https://nypost.com/wp-content/themes/nypost/assets/images/favicons/favicon-32x32.png",
+    "publishedAt": "2025-05-15T15:12:01Z",
+    "summary": "Persistent fatigue may be more than just tiredness—it could be a lingering symptom of a transient ischemic attack (TIA), or 'mini-stroke,' according to a recent study published in Neurology. Researchers tracked TIA patients for a year and found that long-term fatigue was common, particularly among those who reported tiredness within two weeks of hospitalization.\n\nTIA involves a temporary disruption of blood flow to the brain, causing short-term stroke-like symptoms, but it may also increase the risk of full-blown strokes, cognitive decline, and dementia. The study underscores the importance of recognizing fatigue as a potential warning sign and the need for preventative care.",
+    "factualRating": 5,
+    "biasRating": "Center",
+    "tradingInsights": [
+      {
+        "ticker": "PFE",
+        "insight": "Increased awareness of TIA-related fatigue may lead to higher demand for preventive medications, benefiting Pfizer.",
+        "sentiment": "positive"
+      },
+      {
+        "ticker": "JNJ",
+        "insight": "Johnson & Johnson could see increased sales in their cardiovascular product lines due to heightened focus on stroke prevention.",
+        "sentiment": "positive"
+      },
+      {
+        "ticker": "MDT",
+        "insight": "Medtronic's stroke prevention devices may experience increased demand as awareness of TIA consequences grows.",
+        "sentiment": "positive"
+      }
+    ]
+  },
+  {
+    "title": "Israeli Airstrikes Kill Over 100 in Gaza Amid Escalating Conflict",
+    "oneLineTitle": "Over 100 Killed in Gaza Airstrikes",
+    "url": "https://www.thetimes.co.uk/article/gaza-strikes-khan-younis-bombing-jwkz5m2xh",
+    "imageUrl": "https://www.thetimes.co.uk/images/gaza-strikes.jpg",
+    "sourceName": "The Times",
+    "sourceLogoUrl": "https://www.thetimes.co.uk/images/logo.png",
+    "publishedAt": "2025-05-15T00:00:00Z",
+    "summary": "On May 15, 2025, Israeli airstrikes on Gaza led to over 100 deaths, particularly in Khan Yunis, where 54 fatalities, including children, were confirmed by the Hamas-run Nasser Hospital. Another strike rendered the European Hospital non-operational, reportedly targeting a Hamas command center beneath it. The escalation followed a brief truce during which Israeli-American hostage Edan Alexander was released. Israel stated it was targeting militants after Hamas rocket attacks, urging civilians to evacuate.\n\nThe ongoing conflict has resulted in severe humanitarian consequences, with the World Health Organization warning of famine conditions amid a three-month blockade. The U.S. and Israel have agreed to deliver aid, but logistical challenges persist. President Trump suggested turning Gaza into a 'freedom zone' under American oversight, raising speculation about U.S. territorial involvement. Meanwhile, Hamas confirmed peace discussions with U.S. intermediaries, seeking total Israeli withdrawal, prisoner exchange, and unrestricted aid.",
+    "factualRating": 5,
+    "biasRating": "Center",
+    "tradingInsights": [
+      {
+        "ticker": "LMT",
+        "insight": "Increased military operations may lead to higher demand for defense equipment.",
+        "sentiment": "Positive"
+      },
+      {
+        "ticker": "XOM",
+        "insight": "Middle East instability could drive up oil prices, benefiting energy companies.",
+        "sentiment": "Positive"
+      },
+      {
+        "ticker": "DAL",
+        "insight": "Escalating conflict may disrupt international travel routes, impacting airlines.",
+        "sentiment": "Negative"
+      }
+    ]
+  },
+  {
+    "title": "Gaza's Only Cancer Hospital Rendered Inoperable After Israeli Strikes",
+    "oneLineTitle": "Gaza Cancer Hospital Hit by Airstrikes",
+    "url": "https://apnews.com/article/b32d055195ffec2b349a0948582c68e3",
+    "imageUrl": "https://apnews.com/images/gaza-hospital.jpg",
+    "sourceName": "Associated Press",
+    "sourceLogoUrl": "https://apnews.com/images/logo.png",
+    "publishedAt": "2025-05-15T00:00:00Z",
+    "summary": "Overnight Israeli airstrikes on Khan Younis in southern Gaza killed 54 people, including Al Araby TV journalist Hasan Samour and 11 of his family members, according to hospital reports. Additional strikes in northern Gaza, particularly Jabaliya, killed 13 more. This marks the second night of intense bombing amid ongoing conflict. Israel, led by Prime Minister Benjamin Netanyahu, seeks to escalate its military operation to eliminate Hamas, which governs Gaza. The war began when Hamas-led militants killed 1,200 Israelis on October 7, 2023. Israel's retaliation has resulted in over 53,000 Palestinian deaths and nearly 120,000 injuries, according to Gaza's Health Ministry.\n\nGaza's European Hospital in Khan Younis, the last facility providing cancer treatment, was rendered non-operational by Israeli strikes, forcing the evacuation of 200 patients. Additionally, Israel’s blockade, now in its third month, has halted all aid, pushing nearly half a million Palestinians to the brink of starvation. Human Rights Watch has called Israel’s actions a potential step toward extermination and urged international intervention. Meanwhile, Hamas still holds 58 Israeli hostages. As President Donald Trump visits the Middle East, hopes for a ceasefire or renewed aid remain unmet. Israel denies allegations of genocide amid increasing international concern.",
+    "factualRating": 5,
+    "biasRating": "Center",
+    "tradingInsights": [
+      {
+        "ticker": "MRK",
+        "insight": "Disruption of healthcare facilities may affect pharmaceutical supply chains.",
+        "sentiment": "Negative"
+      },
+      {
+        "ticker": "UNH",
+        "insight": "Increased global health crises could lead to higher insurance claims.",
+        "sentiment": "Negative"
+      },
+      {
+        "ticker": "RTX",
+        "insight": "Ongoing conflict may boost demand for defense technologies.",
+        "sentiment": "Positive"
+      }
+    ]
+  },
+  {
+    "title": "US and China Agree to Slash Tariffs in Major Trade De-escalation",
+    "oneLineTitle": "US-China Slash Tariffs in Trade Deal",
+    "url": "https://www.ft.com/content/f913f4d9-7856-4a91-b629-ca4b12e143a3",
+    "imageUrl": "https://www.ft.com/__origami/service/image/v2/images/raw/ftcms%3A3a6b4b0e-5c9f-11e9-9c76-bf4a0ce37d49?source=next&fit=scale-down&width=700",
+    "sourceName": "Financial Times",
+    "sourceLogoUrl": "https://www.ft.com/__origami/service/image/v2/images/raw/ftlogo?source=next&fit=scale-down&width=700",
+    "publishedAt": "2025-05-13T00:00:00Z",
+    "summary": "The United States and China have reached a significant agreement to reduce tariffs for 90 days, marking a major de-escalation in their prolonged trade war. Under the deal, U.S. tariffs on Chinese goods will drop from 145% to 30%, while China will lower duties on U.S. products from 125% to 10%. The announcement, made after negotiations in Geneva led by U.S. Treasury Secretary Scott Bessent and Chinese Vice-Premier He Lifeng, sparked a rally in global stock markets, with the S&P 500 futures up 2.8% and the U.S. dollar gaining 0.7%.",
+    "factualRating": 5,
+    "biasRating": "Center",
+    "tradingInsights": [
+      {
+        "ticker": "SPY",
+        "insight": "The tariff reduction is expected to boost investor confidence, leading to a positive impact on the S&P 500 index.",
+        "sentiment": "positive"
+      },
+      {
+        "ticker": "FXI",
+        "insight": "Chinese equities may benefit from reduced trade tensions, potentially driving gains in the FXI ETF.",
+        "sentiment": "positive"
+      },
+      {
+        "ticker": "BABA",
+        "insight": "Alibaba could see increased cross-border sales due to lowered tariffs, positively impacting its stock.",
+        "sentiment": "positive"
+      }
+    ]
+  },
+  {
+    "title": "Walmart Warns of Price Hikes as Trump Tariffs Take Effect",
+    "oneLineTitle": "Walmart to Raise Prices Amid Tariffs",
+    "url": "https://www.reuters.com/business/retail-consumer/walmart-warns-higher-prices-withholds-second-quarter-profit-guidance-2025-05-15/",
+    "imageUrl": "https://www.reuters.com/resizer/v2/3Y4U4K3Q3ZK7N5K7X5K5K5K5K5K.jpg?auth=abc123&width=700",
+    "sourceName": "Reuters",
+    "sourceLogoUrl": "https://www.reuters.com/pf/resources/images/reuters/logo-vertical-2x.png?d=148",
+    "publishedAt": "2025-05-15T18:22:00Z",
+    "summary": "Walmart has announced that it will raise prices on certain products starting at the end of May due to the impact of new tariffs imposed by the Trump administration. The company reported a 4.5% rise in U.S. comparable sales for Q1 but withheld its second-quarter profit guidance, citing uncertainty from the tariffs. The White House maintains that economic indicators are positive and that the tariffs will ultimately improve the cost of living.",
+    "factualRating": 5,
+    "biasRating": "Center",
+    "tradingInsights": [
+      {
+        "ticker": "WMT",
+        "insight": "Anticipated price hikes may lead to reduced consumer spending at Walmart, potentially impacting its revenue.",
+        "sentiment": "negative"
+      },
+      {
+        "ticker": "TGT",
+        "insight": "Target may face similar challenges as Walmart due to tariffs, possibly affecting its sales and stock performance.",
+        "sentiment": "negative"
+      },
+      {
+        "ticker": "COST",
+        "insight": "Costco's bulk purchasing model may mitigate some tariff impacts, potentially giving it a competitive edge.",
+        "sentiment": "positive"
+      }
+    ]
+  },
+  {
+    "title": "India's Oil Demand to Surge by 3.39% in 2025, Doubling China's Pace: OPEC Report",
+    "oneLineTitle": "India's Oil Demand to Double China's",
+    "url": "https://timesofindia.indiatimes.com/business/india-business/indias-oil-demand-to-surge-by-3-39-in-2025-doubling-chinas-pace-opec-report/articleshow/121188320.cms",
+    "imageUrl": "https://static.toiimg.com/thumb/msid-121188320,width-700,height-525,imgsize-123456,resizemode-75/121188320.jpg",
+    "sourceName": "The Times of India",
+    "sourceLogoUrl": "https://timesofindia.indiatimes.com/photo/50761057.cms",
+    "publishedAt": "2025-05-16T00:00:00Z",
+    "summary": "According to the latest Monthly Oil Market Report by OPEC, India is projected to experience the fastest oil demand growth among major global economies in both 2025 and 2026. Specifically, India's oil demand is forecasted to surge by 3.39% in 2025, more than doubling the growth rate of oil demand in China. This trend underscores India's increasing energy needs amid its rapid economic development and expanding industrial activity.",
+    "factualRating": 5,
+    "biasRating": "Center",
+    "tradingInsights": [
+      {
+        "ticker": "BPCL",
+        "insight": "Bharat Petroleum may benefit from increased domestic oil demand, potentially boosting its revenues.",
+        "sentiment": "positive"
+      },
+      {
+        "ticker": "RELIANCE",
+        "insight": "Reliance Industries' refining and petrochemical segments could see growth due to higher oil consumption.",
+        "sentiment": "positive"
+      },
+      {
+        "ticker": "XOM",
+        "insight": "ExxonMobil's exports to India may rise, positively impacting its international sales.",
+        "sentiment": "positive"
+      }
+    ]
+  },
+  {
+    "title": "Rare Earth Mineral Tensions Spark New Economic Conflict",
+    "oneLineTitle": "Rare Earth Tensions Hit EV Industry",
+    "url": "https://www.theverge.com/electric-cars/665198/rare-earth-magnet-ev-motor-china-tariff",
+    "imageUrl": "https://cdn.vox-cdn.com/thumbor/abc123/0x0:1024x768/1200x800/filters:focal(512x384:513x385)/cdn.vox-cdn.com/uploads/chorus_image/image/665198/rare_earth_minerals.0.jpg",
+    "sourceName": "The Verge",
+    "sourceLogoUrl": "https://cdn.vox-cdn.com/uploads/chorus_asset/file/7395351/Verge_Logo_2016.png",
+    "publishedAt": "2025-05-16T00:00:00Z",
+    "summary": "The global dependency on China for rare earth minerals—essential components in electric vehicles (EVs), military equipment, and electronics—is sparking a new economic conflict. China refines over 90% of the world's rare earths and has recently tightened export rules, demanding special licenses and end-user disclosures, significantly impacting U.S. automakers like Tesla, Ford, GM, and Rivian. These minerals, particularly neodymium, dysprosium, and terbium, are crucial for manufacturing high-performance magnets used in motors and other automotive systems.",
+    "factualRating": 5,
+    "biasRating": "Center",
+    "tradingInsights": [
+      {
+        "ticker": "TSLA",
+        "insight": "Tesla may face supply chain disruptions due to China's rare earth export restrictions, potentially affecting production.",
+        "sentiment": "negative"
+      },
+      {
+        "ticker": "MP",
+        "insight": "MP Materials could benefit from increased demand for domestically sourced rare earth minerals.",
+        "sentiment": "positive"
+      },
+      {
+        "ticker": "GM",
+        "insight": "General Motors may encounter challenges in securing essential materials for EV production, impacting its output.",
+        "sentiment": "negative"
+      }
+    ]
+  },
+  {
+    "title": "45,000 UK Businesses on Brink of Collapse Amid Tariff and Tax Hikes",
+    "oneLineTitle": "UK Businesses Face Collapse Amid Tariffs",
+    "url": "https://www.thescottishsun.co.uk/money/14794615/red-flag-uk-business-collapse-report/",
+    "imageUrl": "https://www.thescottishsun.co.uk/wp-content/uploads/2025/05/uk-business-collapse.jpg",
+    "sourceName": "The Scottish Sun",
+    "sourceLogoUrl": "https://www.thescottishsun.co.uk/wp-content/themes/thescottishsun/assets/img/logo.png",
+    "publishedAt": "2025-05-16T00:00:00Z",
+    "summary": "A recent 'Red Flag Alert' report from Begbies Traynor reveals that 45,416 UK businesses are in critical financial distress as of March 31, 2025—a 13.1% increase from Q1 2024. These businesses, primarily in consumer-facing sectors such as bars, restaurants, travel, and retail, face imminent insolvency due to rising costs from tax hikes, increased national insurance contributions, and minimum wage changes.",
+    "factualRating": 5,
+    "biasRating": "Center",
+    "tradingInsights": [
+      {
+        "ticker": "HSBC",
+        "insight": "HSBC may face increased loan defaults from struggling UK businesses, potentially impacting its financial performance.",
+        "sentiment": "negative"
+      },
+      {
+        "ticker": "BARC",
+        "insight": "Barclays could see higher credit risk exposure due to the financial distress of UK SMEs.",
+        "sentiment": "negative"
+      },
+      {
+        "ticker": "MKS",
+        "insight": "Marks & Spencer may experience reduced consumer spending, affecting its sales and profitability.",
+        "sentiment": "negative"
+      }
+    ]
+  }
+]

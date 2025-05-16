@@ -3,22 +3,22 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
+import { config } from './config/env';
 
 // Import routes
-import passkeyRoutes from './routes/passkey.routes';
-import stellarRoutes from './routes/stellar.routes';
+import { passkeyRoutes, stellarRoutes } from './routes';
 
 // Load environment variables
 dotenv.config();
 
 // Initialize express
 const app = express();
-const port = process.env.PORT || 3001;
+const port = config.port;
 
 // Apply middleware
 app.use(helmet());
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+  origin: config.corsOrigin,
   credentials: true
 }));
 app.use(express.json());
@@ -29,7 +29,7 @@ app.use('/api/passkey', passkeyRoutes);
 app.use('/api/stellar', stellarRoutes);
 
 // Health check endpoint
-app.get('/health', (req, res) => {
+app.get('/health', (req: express.Request, res: express.Response) => {
   res.status(200).json({ status: 'OK', message: 'Server is running' });
 });
 
@@ -39,7 +39,7 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
   res.status(500).json({
     status: 'error',
     message: 'Something went wrong on the server',
-    error: process.env.NODE_ENV === 'development' ? err.message : undefined
+    error: config.nodeEnv === 'development' ? err.message : undefined
   });
 });
 
