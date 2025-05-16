@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import Image from "next/image";
-import { connectWallet, stakeTrueTokens, signVerificationOnRootstock, isWalletConnected } from "@/lib/wallet-utils";
+import { verifyNewsOnStellar, stakeXLM, isWalletConnected, connectWallet } from "@/lib/wallet-utils";
 
 // Mock data
 const USER_DATA = {
@@ -210,8 +211,8 @@ export default function ProfilePage() {
         }
       }
       
-      // Step 1: Stake TRUE tokens on SAGA chainlet
-      const stakeResult = await stakeTrueTokens(10);
+      // Step 1: Stake XLM on Stellar
+      const stakeResult = await stakeXLM(10);
       if (!stakeResult.success) {
         setProcessingStake(false);
         return;
@@ -225,7 +226,7 @@ export default function ProfilePage() {
       
       // Step 2: Sign verification data on Rootstock
       setVerificationStep('verifying');
-      const signResult = await signVerificationOnRootstock(
+      const signResult = await verifyNewsOnStellar(
         pendingNewsItem.id, 
         verificationChoice,
         {
@@ -361,7 +362,7 @@ export default function ProfilePage() {
               <div className="grid grid-cols-3 gap-4 w-full md:w-auto">
                 <div className="bg-white/15 backdrop-blur-lg border border-white/20 rounded-xl p-5 text-center shadow-lg transform transition-transform hover:scale-105">
                   <div className="text-2xl font-bold text-white">{USER_DATA.tokens}</div>
-                  <div className="text-sm text-white/80 font-medium">TRUE Tokens</div>
+                  <div className="text-sm text-white/80 font-medium">XLM Balance</div>
                 </div>
                 <div className="bg-white/15 backdrop-blur-lg border border-white/20 rounded-xl p-5 text-center shadow-lg transform transition-transform hover:scale-105">
                   <div className="text-2xl font-bold text-white">{USER_DATA.totalVerified}</div>
@@ -454,7 +455,7 @@ export default function ProfilePage() {
                       <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
-                      <span className="text-gray-700">+{USER_DATA.level * 3} TRUE tokens per verification</span>
+                      <span className="text-gray-700">+{USER_DATA.level * 3} XLM per verification</span>
                     </li>
                     <li className="flex items-start">
                       <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
@@ -477,7 +478,7 @@ export default function ProfilePage() {
                       <svg className="w-5 h-5 text-indigo-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
-                      <span className="text-gray-700">+{(USER_DATA.level+1) * 3} TRUE tokens per verification</span>
+                      <span className="text-gray-700">+{(USER_DATA.level+1) * 3} XLM per verification</span>
                     </li>
                     <li className="flex items-start">
                       <svg className="w-5 h-5 text-indigo-500 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
@@ -1133,7 +1134,7 @@ export default function ProfilePage() {
                         <div>
                           <p className="text-sm text-gray-700 font-medium mb-1">Staking Required</p>
                           <p className="text-sm text-gray-600">
-                            To participate in the verification process, you need to stake 10 TRUE tokens. These tokens will be:
+                            To participate in the verification process, you need to stake 10 XLM. These tokens will be:
                           </p>
                           <ul className="mt-2 space-y-1 text-sm text-gray-600 list-disc list-inside">
                             <li>Added to the verification pool for this news item</li>
@@ -1168,7 +1169,7 @@ export default function ProfilePage() {
                       </h4>
                       <p className="text-sm text-gray-600 mb-4">
                         {verificationStep === 'staking' 
-                          ? "Please confirm the transaction in your wallet to stake 10 TRUE tokens on the SAGA chainlet." 
+                          ? "Please confirm the transaction using your Stellar Passkey to stake 10 XLM." 
                           : "Please sign the verification message in your wallet on the Rootstock network."}
                       </p>
                       
@@ -1180,7 +1181,7 @@ export default function ProfilePage() {
                       
                       {verificationStep === 'staking' ? (
                         <div className="mt-4 flex flex-col w-full">
-                          <p className="text-xs text-gray-500 mb-1">Step 1/2: Staking on SAGA chainlet</p>
+                          <p className="text-xs text-gray-500 mb-1">Step 1/2: Staking on Stellar</p>
                           <div className="w-full bg-gray-200 rounded-full h-1.5">
                             <div className="bg-blue-600 h-1.5 rounded-full w-1/2"></div>
                           </div>
@@ -1235,7 +1236,7 @@ export default function ProfilePage() {
             </svg>
             <div>
               <p className="font-medium">Cross-Chain Verification Complete</p>
-              <p className="text-sm text-green-100">10 TRUE tokens staked on SAGA chainlet and verified on Rootstock</p>
+              <p className="text-sm text-green-100">10 XLM staked on Stellar network</p>
             </div>
           </div>
         </div>

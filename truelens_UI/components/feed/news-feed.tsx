@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import NewsCard from "../marketplace/news-card";
 import Image from "next/image";
-import { signVerificationOnRootstock, getMetaMaskProvider, isWalletConnected, connectWallet } from "@/lib/wallet-utils";
+import { verifyNewsOnStellar, isWalletConnected, connectWallet } from "@/lib/wallet-utils";
 
 interface NewsItem {
   id: string;
@@ -226,7 +226,7 @@ export default function NewsFeed() {
       }
       
       // Directly sign the message on Rootstock - this will trigger MetaMask
-      const signResult = await signVerificationOnRootstock(
+      const signResult = await verifyNewsOnStellar(
         parseInt(newsToFlag.id), 
         'flag',
         {
@@ -243,10 +243,10 @@ export default function NewsFeed() {
         setNotification({
           show: true,
           type: 'success',
-          message: `Thank you for flagging "${newsToFlag.title}" as potentially fake news. Your flag has been recorded on the Rootstock testnet.`,
+          message: 'News flagged successfully!',
           txHash: signResult.hash,
-          gasFee: signResult.gasFee,
-          totalCost: signResult.totalCost
+          gasFee: signResult.fee,
+          totalCost: signResult.fee // In Stellar, fee is the total cost
         });
         setTimeout(() => setNotification(prev => ({...prev, show: false})), 8000);
       } else {
@@ -837,7 +837,7 @@ export default function NewsFeed() {
                             Flag as Fake News
                           </button>
                           <p className="text-xs text-gray-500 mt-2 text-center">
-                            Flag this news if you believe it's fake. You'll earn TRUE tokens if your prediction is correct.
+                            Flag this news if you believe it's fake. You'll earn XLM if your prediction is correct.
                           </p>
                         </div>
                       </div>
@@ -944,7 +944,7 @@ export default function NewsFeed() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
                           <p className="text-xs text-gray-600">
-                            You've staked 10 TRUE tokens. If your flag is correct, you'll be rewarded with up to 50 TRUE tokens.
+                            You've staked 10 XLM. If your flag is correct, you'll be rewarded with up to 50 XLM.
                           </p>
                         </div>
                       </div>
