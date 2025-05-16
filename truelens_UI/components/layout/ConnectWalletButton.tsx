@@ -25,7 +25,7 @@ const ConnectWalletButton = () => {
             setWalletAddress(formattedAddress);
           }
         } catch (error) {
-          console.error("Error getting Stellar account address:", error);
+          console.error("Error getting wallet address:", error);
         }
       }
     };
@@ -84,7 +84,7 @@ const ConnectWalletButton = () => {
       className={`inline-flex items-center justify-center rounded-full px-4 py-1.5 text-sm font-medium shadow-sm transition-all duration-200 h-[40px] ${
         isConnecting
           ? 'bg-gray-100 text-gray-500 border border-gray-200'
-          : 'bg-gradient-to-r from-blue-500 to-cyan-600 text-white hover:from-blue-600 hover:to-cyan-700 border border-transparent'
+          : 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white hover:from-indigo-600 hover:to-purple-700 border border-transparent'
       }`}
     >
       {isConnecting ? (
@@ -98,7 +98,10 @@ const ConnectWalletButton = () => {
       ) : (
         <>
           <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M12 13.5C14.2091 13.5 16 11.7091 16 9.5C16 7.29086 14.2091 5.5 12 5.5C9.79086 5.5 8 7.29086 8 9.5C8 11.7091 9.79086 13.5 12 13.5Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M20 18.5C20 19.8807 16.4183 21 12 21C7.58172 21 4 19.8807 4 18.5C4 17.1193 7.58172 16 12 16C16.4183 16 20 17.1193 20 18.5Z" stroke="currentColor" strokeWidth="1.5"/>
+            <path d="M12 5.5V3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M7 6.5L5.5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
           Connect with Passkey
         </>
