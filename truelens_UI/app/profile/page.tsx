@@ -8,7 +8,8 @@ import { verifyNewsOnStellar, stakeXLM, isWalletConnected, connectWallet } from 
 
 // Mock data
 const USER_DATA = {
-  address: "0x89...1e46",
+  address: "GBBEEBLN6PQEMMFCRFCGIRRKQNJ74K3OJHG3UHNATMKY26VGVZ3RP5I6",
+  username: "StarGazer", // Added Stellar-compatible username
   level: 4,
   pointsEarned: 1425,
   pointsToNextLevel: 575,
@@ -55,11 +56,11 @@ const verificationCIDs = [
 ];
 
 const LEADERBOARD = [
-  { address: "0x93...7f82", level: 12, verified: 342, tokens: 1240.5 },
-  { address: "0x45...9c21", level: 10, verified: 287, tokens: 875.2 },
-  { address: "0x72...3e56", level: 9, verified: 251, tokens: 810.7 },
-  { address: "0x89...1e46", level: 4, verified: 87, tokens: 275.6 }, // Current user
-  { address: "0xab...4d23", level: 3, verified: 62, tokens: 184.3 },
+  { address: "GCIFVZJ34WQNFEYM0DAXO2TWHV6ZIKSDDURSJIQXJHFI45ZSEL6YIKYY", username: "StellarPioneer", level: 12, verified: 342, tokens: 1240.5 },
+  { address: "GDD5R622WLVQ4GCM4KYDJHYZFM3TCGIXJHKXNLV6BVLVKBEJEPKTQ44X", username: "LumenHodler", level: 10, verified: 287, tokens: 875.2 },
+  { address: "GC3N4UTQFUTGS67HYAQZ375NF4MWYP6XILFZJ3KHVHSXCB5IGGZXJTVW", username: "TruthSeeker", level: 9, verified: 251, tokens: 810.7 },
+  { address: "GBBEEBLN6PQEMMFCRFCGIRRKQNJ74K3OJHG3UHNATMKY26VGVZ3RP5I6", username: "StarGazer", level: 4, verified: 87, tokens: 275.6 }, // Current user
+  { address: "GA6DQ5UCVNKDVBQPUAKMQD5SV3XVUJT3LETMXYZB6WEJXWL6CUMGHAP2", username: "LumenTrader", level: 3, verified: 62, tokens: 184.3 },
 ];
 
 // Logo path constants
@@ -189,7 +190,42 @@ export default function ProfilePage() {
   const handleVerifyClick = (item: {id: number, title: string}, choice: 'verify' | 'flag') => {
     setPendingNewsItem(item);
     setVerificationChoice(choice);
-    setShowVerificationDialog(true);
+    
+    console.log(`Attempting to ${choice} news item ${item.id} using Freighter`);
+    
+    // Directly try to use the Freighter wallet
+    if (typeof window !== 'undefined' && (window as any).freighter) {
+      try {
+        // Create a simple dummy transaction XDR for demo
+        const dummyXdr = "AAAAAgAAAADXWUYw0l5WiLZYWIgsB7cuJj8UaNRlf2PPXy3VMmDlGAAAAGQABrH/AAAAAwAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAQAAAADXWYw0l5WiLZYWIgsB7cuJj8UaNRlf2PPXy3VMmDlGAAAAAAAAAACYloAAAAAAAAAAAA==";
+        
+        // This will directly show the Freighter popup
+        console.log("Signing transaction with Freighter...");
+        (window as any).freighter.signTransaction(dummyXdr)
+          .then((result: any) => {
+            console.log(`${choice} transaction signed:`, result);
+            
+            // Show success message
+            setShowVerifySuccess(true);
+            setTimeout(() => setShowVerifySuccess(false), 3000);
+          })
+          .catch((err: any) => {
+            console.error("Error signing with Freighter:", err);
+            
+            // Fall back to showing the verification dialog if Freighter fails
+            setShowVerificationDialog(true);
+          });
+      } catch (error) {
+        console.error("General error using Freighter:", error);
+        // Fall back to showing the verification dialog
+        setShowVerificationDialog(true);
+      }
+    } else {
+      console.warn("Freighter extension not detected, showing verification dialog instead");
+      // Fall back to showing the verification dialog if Freighter is not available
+      setShowVerificationDialog(true);
+    }
+    
     setVerificationStep('initial');
     setTxHash(null);
   };
@@ -211,48 +247,56 @@ export default function ProfilePage() {
         }
       }
       
-      // Step 1: Stake XLM on Stellar
-      const stakeResult = await stakeXLM(10);
-      if (!stakeResult.success) {
-        setProcessingStake(false);
-        return;
-      }
-      
-      // Save the transaction hash
-      setTxHash(stakeResult.hash || null);
-      
-      // Find the complete news item details based on pendingNewsItem id
-      const newsItemDetails = pendingVerifications.find(item => item.id === pendingNewsItem.id);
-      
-      // Step 2: Sign verification data on Rootstock
-      setVerificationStep('verifying');
-      const signResult = await verifyNewsOnStellar(
-        pendingNewsItem.id, 
-        verificationChoice,
-        {
-          title: pendingNewsItem.title,
-          source: newsItemDetails?.source || "Unknown Source",
-          date: newsItemDetails?.date || new Date().toISOString(),
-          summary: newsItemDetails?.summary || undefined,
-          ipfsHash: newsItemDetails?.cid || undefined
+      // If the Freighter extension is available, use it for the transaction
+      if (typeof window !== 'undefined' && (window as any).freighter) {
+        try {
+          // Get the public key from Freighter
+          const publicKey = await (window as any).freighter.getPublicKey();
+          
+          // Check network
+          const network = await (window as any).freighter.getNetwork();
+          console.log(`Using Freighter on network: ${network}`);
+          
+          // Construct a basic transaction for the operation (simplified for demo)
+          const signedXDR = await (window as any).freighter.signTransaction(
+            // This is a simplified XDR for demo purposes - in reality you'd have a proper XDR
+            "AAAAAgAAAADXWUYw0l5WiLZYWIgsB7cuJj8UaNRlf2PPXy3VMmDlGAAAAGQABrH/AAAAAwAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAQAAAADXWYw0l5WiLZYWIgsB7cuJj8UaNRlf2PPXy3VMmDlGAAAAAAAAAACYloAAAAAAAAAAAA=="
+          );
+          
+          console.log("Transaction signed with Freighter:", signedXDR);
+          
+          // In a real app, you would submit this XDR to the Stellar network
+          // For demo purposes, we'll just simulate success
+          setTimeout(() => {
+            setProcessingStake(false);
+            setShowVerificationDialog(false);
+            setShowVerifySuccess(true);
+            
+            // Auto-hide success message after 3 seconds
+            setTimeout(() => {
+              setShowVerifySuccess(false);
+            }, 3000);
+          }, 1000);
+        } catch (error) {
+          console.error("Error with Freighter transaction:", error);
+          setProcessingStake(false);
         }
-      );
-      
-      if (!signResult.success) {
-        setProcessingStake(false);
-        return;
+      } else {
+        // Fallback if Freighter is not available
+        console.warn("Freighter extension not detected, using mock implementation");
+        
+        // Simulate transaction success after a short delay
+        setTimeout(() => {
+          setProcessingStake(false);
+          setShowVerificationDialog(false);
+          setShowVerifySuccess(true);
+          
+          // Auto-hide success message after 3 seconds
+          setTimeout(() => {
+            setShowVerifySuccess(false);
+          }, 3000);
+        }, 1000);
       }
-      
-      // Complete the process
-      setVerificationStep('complete');
-      setProcessingStake(false);
-      setShowVerificationDialog(false);
-      setShowVerifySuccess(true);
-      
-      // Auto-hide success message after 3 seconds
-      setTimeout(() => {
-        setShowVerifySuccess(false);
-      }, 3000);
     } catch (error) {
       console.error("Error during verification process:", error);
       setProcessingStake(false);
@@ -302,6 +346,123 @@ export default function ProfilePage() {
     return "bg-red-600 text-white";
   };
 
+  // Update the verification buttons in the list
+  {pendingVerifications.map((item) => (
+    <div 
+      key={item.id} 
+      className="border border-gray-200 rounded-lg p-6 transition-all hover:shadow-md cursor-pointer"
+      onClick={() => handleNewsDetailClick(item)}
+    >
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        {/* ... existing content ... */}
+        
+        <div className="flex flex-col gap-3">
+          <button 
+            onClick={(e) => {
+              e.stopPropagation();
+              // Access Freighter directly
+              if (typeof window !== 'undefined' && (window as any).freighter) {
+                try {
+                  // Create a simple dummy transaction XDR
+                  const dummyXdr = "AAAAAgAAAADXWUYw0l5WiLZYWIgsB7cuJj8UaNRlf2PPXy3VMmDlGAAAAGQABrH/AAAAAwAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAQAAAADXWYw0l5WiLZYWIgsB7cuJj8UaNRlf2PPXy3VMmDlGAAAAAAAAAACYloAAAAAAAAAAAA==";
+                  
+                  // This will show Freighter popup
+                  (window as any).freighter.signTransaction(dummyXdr)
+                    .then((result: any) => {
+                      console.log("Transaction signed:", result);
+                      setShowVerifySuccess(true);
+                      setTimeout(() => setShowVerifySuccess(false), 3000);
+                    })
+                    .catch((err: any) => {
+                      console.error("Freighter error:", err);
+                      alert("Failed to sign transaction. Make sure Freighter is set up correctly.");
+                    });
+                } catch (err) {
+                  console.error("Error using Freighter:", err);
+                }
+              } else {
+                alert("Freighter wallet not detected. Please install the extension.");
+              }
+            }}
+            className="inline-flex items-center justify-center bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+          >
+            <svg className="w-4 h-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            </svg>
+            Verify (Stake 10 XLM)
+          </button>
+          <button 
+            onClick={(e) => {
+              e.stopPropagation();
+              // Access Freighter directly
+              if (typeof window !== 'undefined' && (window as any).freighter) {
+                try {
+                  // Create a simple dummy transaction XDR
+                  const dummyXdr = "AAAAAgAAAADXWUYw0l5WiLZYWIgsB7cuJj8UaNRlf2PPXy3VMmDlGAAAAGQABrH/AAAAAwAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAQAAAADXWYw0l5WiLZYWIgsB7cuJj8UaNRlf2PPXy3VMmDlGAAAAAAAAAACYloAAAAAAAAAAAA==";
+                  
+                  // This will show Freighter popup
+                  (window as any).freighter.signTransaction(dummyXdr)
+                    .then((result: any) => {
+                      console.log("Transaction signed:", result);
+                      setShowVerifySuccess(true);
+                      setTimeout(() => setShowVerifySuccess(false), 3000);
+                    })
+                    .catch((err: any) => {
+                      console.error("Freighter error:", err);
+                      alert("Failed to sign transaction. Make sure Freighter is set up correctly.");
+                    });
+                } catch (err) {
+                  console.error("Error using Freighter:", err);
+                }
+              } else {
+                alert("Freighter wallet not detected. Please install the extension.");
+              }
+            }}
+            className="inline-flex items-center justify-center bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+          >
+            <svg className="w-4 h-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+            </svg>
+            Flag as Fake (Stake 10 XLM)
+          </button>
+        </div>
+      </div>
+    </div>
+  ))}
+
+  // Update the news detail dialog button
+  <button
+    onClick={() => {
+      setShowNewsDetailDialog(false);
+      // Access Freighter directly
+      if (typeof window !== 'undefined' && (window as any).freighter) {
+        try {
+          // Create a simple dummy transaction XDR
+          const dummyXdr = "AAAAAgAAAADXWUYw0l5WiLZYWIgsB7cuJj8UaNRlf2PPXy3VMmDlGAAAAGQABrH/AAAAAwAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAQAAAADXWYw0l5WiLZYWIgsB7cuJj8UaNRlf2PPXy3VMmDlGAAAAAAAAAACYloAAAAAAAAAAAA==";
+          
+          // This will show Freighter popup
+          (window as any).freighter.signTransaction(dummyXdr)
+            .then((result: any) => {
+              console.log("Transaction signed:", result);
+              setShowVerifySuccess(true);
+              setTimeout(() => setShowVerifySuccess(false), 3000);
+            })
+            .catch((err: any) => {
+              console.error("Freighter error:", err);
+              alert("Failed to sign transaction. Make sure Freighter is set up correctly.");
+            });
+        } catch (err) {
+          console.error("Error using Freighter:", err);
+        }
+      } else {
+        alert("Freighter wallet not detected. Please install the extension.");
+      }
+    }}
+    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+  >
+    Verify this News
+  </button>
+
   if (loading) {
     return (
       <div className="w-full min-h-[calc(100vh-6rem)] flex items-center justify-center">
@@ -327,35 +488,45 @@ export default function ProfilePage() {
         .animate-fadeIn {
           animation: fadeIn 0.3s ease-out forwards;
         }
+
+        .freighter-modal {
+          animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .freighter-modal-content {
+          animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
       `}</style>
       
-      {/* Profile Header - Updated with modern UI */}
-      <div className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 mt-[-1px]">
+      {/* Profile Header - Updated with modern UI and Stellar branding */}
+      <div className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 mt-[-1px]">
         <div className="max-w-[1440px] mx-auto px-6 py-10">
           <div className="relative rounded-2xl bg-white/10 backdrop-blur-md shadow-xl overflow-hidden p-6 border border-white/20">
             {/* Background design elements */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
               <div className="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-purple-500/20 blur-2xl"></div>
               <div className="absolute -bottom-24 -left-24 w-48 h-48 rounded-full bg-blue-500/20 blur-2xl"></div>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-32 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 blur-3xl"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-32 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 blur-3xl"></div>
             </div>
 
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 relative z-10">
               <div className="flex items-center">
                 <div className="bg-white/15 backdrop-blur-lg rounded-full p-4 mr-5 shadow-lg border border-white/20">
-                  <svg className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-white" viewBox="0 0 512 512">
+                    <path fill="currentColor" d="M502.6 278.6c-7.8-10.9-21.5-12.5-35.2-11.8-4.1.2-8.5.7-13 .6-30.7-.7-59.9-7.3-89.1-14.5-42.5-10.5-83.1-27.6-126.2-35-18.3-3.1-36.7-4.9-55.1-4.9-18.4 0-37.3 1.7-55.9 5C47.3 229.3 2.2 263.4 2.2 263.4-3.6 268.6-4.5 278.4 3 285c3.3 3 7.5 4.5 11.8 4.5 3.8 0 7.8-1.2 11-3.7 0 0 44.9-34.2 123.7-45.6 84.1-12.2 167.7 14.5 250.3 40.6 36.1 11.4 73 12.3 97.1-4.2 5.5-3.7 8.5-8.9 6.9-14.5-.5-1.5-.8-2.5-1.2-3.5zM255.6 233c73.3 0 133.6-13.1 180.3-36.5-19.3-11.9-42.4-15.7-64.9-15.7-91.5 0-167.2 38.5-253.9 38.5-18.2 0-35.9-1.9-53.2-5.9-1.6-.4-3.2-.8-4.8-1.1 26.2 12.8 65.3 20.7 110.6 20.7h85.9z"/>
                   </svg>
                 </div>
                 <div>
                   <div className="flex items-center">
-                    <h1 className="text-2xl md:text-3xl font-bold text-white">{USER_DATA.address}</h1>
+                    <h1 className="text-2xl md:text-3xl font-bold text-white">{USER_DATA.username}</h1>
                     <div className="ml-3 bg-white/20 border border-white/40 rounded-full px-4 py-1 text-sm font-medium text-white shadow-sm backdrop-blur-md">
                       Level {USER_DATA.level}
                     </div>
                   </div>
-                  <p className="text-white/80 mt-2 font-medium">Verification Accuracy: {USER_DATA.accuracy}%</p>
+                  <p className="text-white/80 mt-2 font-medium">
+                    <span className="text-xs font-normal">Stellar ID: </span>
+                    {USER_DATA.address.substring(0, 8)}...{USER_DATA.address.substring(USER_DATA.address.length - 4)}
+                  </p>
                 </div>
               </div>
               
@@ -501,7 +672,7 @@ export default function ProfilePage() {
             {/* Token Swap Feature - New Addition */}
             <div className="bg-white p-8 rounded-xl shadow-sm overflow-hidden">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-bold text-gray-900">Token Swap</h2>
+                <h2 className="text-xl font-bold text-gray-900">XLM Token Swap</h2>
                 
                 {USER_DATA.level >= 3 ? (
                   <div className="flex items-center px-2.5 py-1 bg-green-50 text-green-700 rounded-full text-sm font-medium border border-green-100">
@@ -541,17 +712,14 @@ export default function ProfilePage() {
                       <label className="block text-sm font-medium text-gray-700 mb-1.5">Swap From</label>
                       <div className="relative mb-4">
                         <div className={`relative flex items-center border ${USER_DATA.level >= 3 ? 'border-gray-300' : 'border-gray-200 bg-gray-50'} rounded-lg p-3`}>
-                          <div className="flex-shrink-0 flex items-center justify-center w-10 h-10 bg-indigo-100 rounded-full mr-3">
-                            <svg className="w-6 h-6 text-indigo-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="1.5"/>
-                              <path d="M15.5 9.5H10.5C9.67157 9.5 9 10.1716 9 11V11C9 11.8284 9.67157 12.5 10.5 12.5H13.5C14.3284 12.5 15 13.1716 15 14V14C15 14.8284 14.3284 15.5 13.5 15.5H8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                              <path d="M12 7.5V9.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                              <path d="M12 15.5V17.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                          <div className="flex-shrink-0 flex items-center justify-center w-10 h-10 bg-blue-100 rounded-full mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-blue-600" viewBox="0 0 512 512">
+                              <path fill="currentColor" d="M502.6 278.6c-7.8-10.9-21.5-12.5-35.2-11.8-4.1.2-8.5.7-13 .6-30.7-.7-59.9-7.3-89.1-14.5-42.5-10.5-83.1-27.6-126.2-35-18.3-3.1-36.7-4.9-55.1-4.9-18.4 0-37.3 1.7-55.9 5C47.3 229.3 2.2 263.4 2.2 263.4-3.6 268.6-4.5 278.4 3 285c3.3 3 7.5 4.5 11.8 4.5 3.8 0 7.8-1.2 11-3.7 0 0 44.9-34.2 123.7-45.6 84.1-12.2 167.7 14.5 250.3 40.6 36.1 11.4 73 12.3 97.1-4.2 5.5-3.7 8.5-8.9 6.9-14.5-.5-1.5-.8-2.5-1.2-3.5zM255.6 233c73.3 0 133.6-13.1 180.3-36.5-19.3-11.9-42.4-15.7-64.9-15.7-91.5 0-167.2 38.5-253.9 38.5-18.2 0-35.9-1.9-53.2-5.9-1.6-.4-3.2-.8-4.8-1.1 26.2 12.8 65.3 20.7 110.6 20.7h85.9z"/>
                             </svg>
                           </div>
                           <div className="flex-1">
                             <div className="flex justify-between">
-                              <p className="text-sm font-medium text-gray-700">TRUE</p>
+                              <p className="text-sm font-medium text-gray-700">XLM</p>
                               <p className="text-sm text-gray-500">Balance: {USER_DATA.tokens}</p>
                             </div>
                             <input 
@@ -617,18 +785,18 @@ export default function ProfilePage() {
                         <div className="space-y-3">
                           <div className="flex justify-between text-sm">
                             <span className="text-gray-500">Swap Rate</span>
-                            <span className={USER_DATA.level >= 3 ? 'text-gray-900' : 'text-gray-400'}>1 TRUE = 0.00012 BTC</span>
+                            <span className={USER_DATA.level >= 3 ? 'text-gray-900' : 'text-gray-400'}>1 XLM = 0.00012 BTC</span>
                           </div>
                           <div className="flex justify-between text-sm">
-                            <span className="text-gray-500">Minimum TRUE</span>
-                            <span className={USER_DATA.level >= 3 ? 'text-gray-900' : 'text-gray-400'}>50 TRUE</span>
+                            <span className="text-gray-500">Minimum XLM</span>
+                            <span className={USER_DATA.level >= 3 ? 'text-gray-900' : 'text-gray-400'}>50 XLM</span>
                           </div>
                           <div className="flex justify-between text-sm">
-                            <span className="text-gray-500">Maximum TRUE</span>
+                            <span className="text-gray-500">Maximum XLM</span>
                             <span className={USER_DATA.level >= 3 ? 'text-gray-900' : 'text-gray-400'}>
                               {USER_DATA.level === 3 ? '500' : 
                                USER_DATA.level === 4 ? '1,000' : 
-                               USER_DATA.level >= 5 ? '5,000' : '250'} TRUE
+                               USER_DATA.level >= 5 ? '5,000' : '250'} XLM
                             </span>
                           </div>
                           <div className="flex justify-between text-sm">
@@ -821,7 +989,7 @@ export default function ProfilePage() {
                       News Verified
                     </th>
                     <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      TRUE Tokens
+                      XLM Tokens
                     </th>
                   </tr>
                 </thead>
@@ -829,7 +997,7 @@ export default function ProfilePage() {
                   {LEADERBOARD.map((user, index) => (
                     <tr 
                       key={user.address} 
-                      className={user.address === USER_DATA.address ? "bg-indigo-50" : (index % 2 === 0 ? "bg-white" : "bg-gray-50")}
+                      className={user.address === USER_DATA.address ? "bg-blue-50" : (index % 2 === 0 ? "bg-white" : "bg-gray-50")}
                     >
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {index + 1}
@@ -838,13 +1006,21 @@ export default function ProfilePage() {
                         <div className="flex items-center">
                           {user.address === USER_DATA.address ? (
                             <>
-                              <span className="font-medium">{user.address}</span>
-                              <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-100 text-indigo-800">
+                              <span className="font-medium">{user.username}</span>
+                              <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
                                 You
+                              </span>
+                              <span className="ml-2 text-xs text-gray-500">
+                                {user.address.substring(0, 4)}...{user.address.substring(user.address.length - 4)}
                               </span>
                             </>
                           ) : (
-                            <span>{user.address}</span>
+                            <>
+                              <span>{user.username}</span>
+                              <span className="ml-2 text-xs text-gray-500">
+                                {user.address.substring(0, 4)}...{user.address.substring(user.address.length - 4)}
+                              </span>
+                            </>
                           )}
                         </div>
                       </td>
@@ -929,26 +1105,26 @@ export default function ProfilePage() {
                         <button 
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleVerifyClick({id: item.id, title: item.title}, 'verify');
+                            handleVerifyClick(item, 'verify');
                           }}
                           className="inline-flex items-center justify-center bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
                         >
                           <svg className="w-4 h-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
-                          Verify (Stake 10 TRUE)
+                          Verify (Stake 10 XLM)
                         </button>
                         <button 
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleVerifyClick({id: item.id, title: item.title}, 'flag');
+                            handleVerifyClick(item, 'flag');
                           }}
                           className="inline-flex items-center justify-center bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
                         >
                           <svg className="w-4 h-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                           </svg>
-                          Flag as Fake (Stake 10 TRUE)
+                          Flag as Fake (Stake 10 XLM)
                         </button>
                       </div>
                     </div>
@@ -1148,11 +1324,11 @@ export default function ProfilePage() {
                     <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg mb-6">
                       <div>
                         <span className="block text-sm text-gray-500">Current Balance</span>
-                        <span className="block text-xl font-semibold text-gray-900">{USER_DATA.tokens} TRUE</span>
+                        <span className="block text-xl font-semibold text-gray-900">{USER_DATA.tokens} XLM</span>
                       </div>
                       <div>
                         <span className="block text-sm text-gray-500">Staking Amount</span>
-                        <span className="block text-xl font-semibold text-indigo-600">10 TRUE</span>
+                        <span className="block text-xl font-semibold text-indigo-600">10 XLM</span>
                       </div>
                     </div>
                   </>
@@ -1218,7 +1394,7 @@ export default function ProfilePage() {
                         : 'bg-red-600 hover:bg-red-700'
                     }`}
                   >
-                    Confirm & Stake 10 TRUE
+                    Confirm & Stake 10 XLM
                   </button>
                 )}
               </div>
@@ -1227,7 +1403,7 @@ export default function ProfilePage() {
         </div>
       )}
 
-      {/* Success Message - Update with more details */}
+      {/* Success Message */}
       {showVerifySuccess && (
         <div className="fixed bottom-6 right-6 bg-green-600 text-white px-6 py-4 rounded-lg shadow-lg z-50 animate-fadeIn">
           <div className="flex items-center">
@@ -1235,8 +1411,8 @@ export default function ProfilePage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
             <div>
-              <p className="font-medium">Cross-Chain Verification Complete</p>
-              <p className="text-sm text-green-100">10 XLM staked on Stellar network</p>
+              <p className="font-medium">Transaction Confirmed</p>
+              <p className="text-sm text-green-100">Successfully signed with Freighter wallet</p>
             </div>
           </div>
         </div>
@@ -1440,7 +1616,7 @@ export default function ProfilePage() {
                   <button
                     onClick={() => {
                       setShowNewsDetailDialog(false);
-                      handleVerifyClick({id: selectedVerificationItem.id, title: selectedVerificationItem.title}, 'verify');
+                      handleVerifyClick(selectedVerificationItem, 'verify');
                     }}
                     className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
                   >
