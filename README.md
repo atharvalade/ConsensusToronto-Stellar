@@ -1,123 +1,143 @@
-# Stellar Consensus News - Authentic News for Better Trades
+# TrueLens-Stellar
 
-## Overview
+A decentralized news verification platform built on Stellar, leveraging passkeys for seamless authentication and transaction signing. This project aims to demonstrate that web3 UX doesn't have to suck by building a dapp with the seamlessness, intuition, and fluidity of web2 UX.
 
-Stellar Consensus News is a decentralized platform that solves the authenticity crisis in news media, helping users make informed trading decisions based on verified information. In today's market, especially during periods of high volatility, news drives significant market movements. Our application uses Stellar's blockchain technology, AI agents, and community verification to ensure only authentic news reaches traders, all with a seamless web2-like UX experience.
+Website: [Stellar Developers](https://developers.stellar.org/)
 
-## Problem Statement
+## Features Implemented
 
-Under the current political climate, news has become a driving force for market movements:
-- The VIX has skyrocketed to COVID-era levels
-- Fake news leads to misled trading decisions and potential financial losses
-- Lack of verification mechanisms for news from multiple sources
-- Traditional blockchain solutions have poor UX with complicated wallet integrations
+- **Passkey-Based Authentication**: Users can create and connect wallets using device biometrics (Face ID, Touch ID, etc.)
+- **Frictionless Onboarding**: New users can get started in seconds with a streamlined registration process
+- **Smart Contract Interaction**: Verify news articles and stake XLM through smart contracts
+- **Automated Funding**: New wallets are automatically funded on testnet for a seamless user experience
+- **News Verification Platform**: Users can verify or flag news articles, helping combat misinformation
+- **Token Staking**: Support verified news sources by staking XLM tokens
+- **Automated Rewards**: Users earn rewards for correctly identifying true/fake news
 
-## Solution
+## Technologies Used
 
-Stellar Consensus News provides a three-pronged approach:
+### Stellar Technologies
+- **[Passkey Kit](https://github.com/kalepail/passkey-kit)**: For seamless biometric authentication and wallet creation
+- **[Stellar SDK](https://github.com/stellar/js-stellar-sdk)**: For interacting with the Stellar blockchain
+- **[Launchtube](https://github.com/stellar/launchtube)**: For submitting transactions to the Stellar network
+- **Soroban Smart Contracts**: Written in Rust to implement the verification and staking logic
 
-1. **AI-Powered News Aggregation**: AI agents scrape data from multiple sources (TruthSocial, X, YouTube, etc.) to collect and analyze news items.
+### Frontend Technologies
+- **Next.js**: React framework for the frontend application
+- **TailwindCSS**: For styling the UI components
+- **TypeScript**: For type-safe code
+- **SvelteKit**: For server-side API routes
 
-2. **Decentralized Verification with Seamless UX**: 
-   - Community members stake XLM to participate in news verification
-   - No wallet integration required - use passkeys for authentication
-   - Verified news (90%+ consensus) appears in users' feeds
-   - Community flagging system to remove later-identified fake news
-   - XLM rewards for accurate verifiers, with a level-based reward system
+## Why TrueLens-Stellar?
 
-3. **Trading Insights**:
-   - AI summarization of verified news
-   - Trading suggestions based on verified information
-   - Market sentiment analysis
-   - Personalized feeds tailored to user interests
+In a world where misinformation spreads faster than ever, TrueLens-Stellar aims to create a decentralized system for news verification that leverages blockchain technology to incentivize truthful reporting. By making the verification process accessible through seamless UX, we lower the barrier to entry for participating in this important ecosystem.
 
-## Architecture
+The key insight is that web3 applications often fail not because of their underlying value proposition, but because of poor user experience. TrueLens-Stellar demonstrates that blockchain applications can be as intuitive and frictionless as traditional web2 applications while maintaining the benefits of decentralization.
 
-### Blockchain Infrastructure
+### Problem Statement
+Misinformation is a pervasive problem that affects financial markets, public health, and democratic processes. Traditional centralized fact-checkers face criticism for potential biases, while decentralized alternatives have suffered from poor user experience, limiting mass adoption.
 
-- **Stellar Blockchain**: Primary chain for verification and XLM rewards
-  - VerificationContract: Smart contract for news verification
-  - NewsRegistry: Smart contract for storing verified news hashes
-  - RewardsDistribution: Smart contract for distributing XLM rewards
+### User Base
+- Cryptocurrency and stock traders who need reliable information
+- News consumers seeking verified information
+- Journalists and content creators looking to establish credibility
+- Fact-checkers who want to earn rewards for their work
 
-### Authentication
+### Impact
+TrueLens creates a more transparent information ecosystem by:
+- Incentivizing truth through token rewards
+- Creating economic penalties for spreading misinformation
+- Building a reputation system for news sources
+- Providing traders with more reliable information for better investment decisions
 
-- **Stellar Passkeys**: Web3 authentication without wallet complexity
-  - Face ID/fingerprint authentication
-  - No seed phrases to remember
-  - Transaction signing with biometrics
+### Why Stellar
+Stellar's passkey-based authentication allows users to participate in web3 verification without the typical wallet complexities. The transaction speed and low fees make micro-staking and rewards economically viable, while smart contracts enable transparent and trustless verification processes.
 
-### Storage
+## Technical Design
 
-- Content stored on IPFS with hash-key verification
-- Similar to archive.org but built for Web3
+Our technical design focuses on three key elements:
 
-### Front-End
+1. **Seamless Authentication**: Using passkeys to eliminate the friction of traditional web3 authentication
+2. **Smart Contract Integration**: Building Rust-based Soroban smart contracts for news verification and staking
+3. **Intuitive UI**: Creating a familiar, web2-like interface that hides the complexity of blockchain interactions
 
-- Modern, clean UI built with Next.js and Tailwind CSS
-- Feed page displaying verified news with sources
-- Profile page showing user level, benefits, and token balance
-- Verification marketplace for staking and earning
-- Leverages Stellar Passkey Kit for wallet creation and management
+[Link to Technical Design Document](docs/TECHNICAL_DESIGN.md)
 
-## Token Economics
+## Deployed Contract IDs
 
-- **XLM**: Native utility token of the Stellar network used in the platform
-- **Staking**: XLM tokens required to participate in verification
-- **Reward Distribution**:
-  - Tokens distributed to accurate verifiers
-  - Higher rewards for higher-level users
-  - Launchtube integration for seamless fee payment
+- **News Verification Contract**: CAVKQCR4WAFPPHAXC24GFEKFADUJZQ6V22O3OPS4FSA3IYFEZM6YTRXY ([Stellar Expert Link](https://stellar.expert/explorer/testnet/contract/CAVKQCR4WAFPPHAXC24GFEKFADUJZQ6V22O3OPS4FSA3IYFEZM6YTRXY))
+- **Token Contract**: CDEJSTARK5YTJAK2SKS6NQAAFZTDDXPTXSNVVIWCOXVPBMVCBTNKBUW ([Stellar Expert Link](https://stellar.expert/explorer/testnet/contract/CDEJSTARK5YTJAK2SKS6NQAAFZTDDXPTXSNVVIWCOXVPBMVCBTNKBUW))
+- **Factory Contract**: GAJNKGZI23LFE5QXMWVZWHUOFUJV2ZOS3YT4U2T47X6A4QVMHX2SJQ7U ([Stellar Expert Link](https://stellar.expert/explorer/testnet/contract/GAJNKGZI23LFE5QXMWVZWHUOFUJV2ZOS3YT4U2T47X6A4QVMHX2SJQ7U))
+
+## Deployment
+
+- Frontend: [TrueLens-Stellar App](https://truelens-stellar.vercel.app) (Coming soon)
+- Backend: Deployed on Stellar Testnet
 
 ## Getting Started
 
-### Backend Setup
+### Prerequisites
+
+- Node.js (v16+)
+- npm or yarn
+- Access to Stellar Testnet
+
+### Installation
+
+1. Clone the repository
 ```bash
-# Clone the repository
-git clone https://github.com/your-org/stellar-consensus-news.git
-
-# Navigate to backend directory
-cd stellar-consensus-news/backend
-
-# Install dependencies
-npm install
-
-# Configure environment variables
-cp .env.example .env
-# Edit .env with your configuration
-
-# Deploy contracts
-npm run deploy:stellar-testnet
+git clone https://github.com/your-username/TrueLens-Stellar.git
+cd TrueLens-Stellar
 ```
 
-### Frontend Setup
+2. Install dependencies
 ```bash
-# Navigate to UI directory
-cd ../truelens_UI
+npm install --legacy-peer-deps
+```
 
-# Install dependencies
-npm install
+3. Create a `.env.local` file based on the `PASSKEY_SETUP.md` template
 
-# Start development server
+4. Run the development server
+```bash
 npm run dev
 ```
 
-## Project Status
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-Stellar Consensus News is currently in development, with the following components in progress:
-- Stellar smart contracts
-- Passkey authentication system
-- AI agents for news verification
-- UI implementation with web2-like UX
+## Project Structure
+
+```
+TrueLens-Stellar/
+├── truelens_UI/           # Frontend Next.js application
+│   ├── app/               # Next.js app directory
+│   ├── components/        # React components
+│   ├── lib/               # Utility functions and hooks
+│   └── public/            # Static assets
+├── factory-contract/      # Soroban smart contracts
+│   ├── src/               # Contract source code
+│   │   ├── lib.rs         # Main factory contract
+│   │   ├── token.rs       # Token contract
+│   │   └── verification.rs # News verification contract
+│   └── Cargo.toml         # Rust dependencies
+├── docs/                  # Documentation
+└── README.md              # Project overview
+```
+
+## Experience Building on Stellar
+
+Building on Stellar has been a transformative experience. The passkey implementation significantly streamlines user onboarding compared to traditional web3 experiences. The developer tooling, particularly the Soroban CLI and SDK, made smart contract development accessible even for developers newer to Rust.
+
+The most exciting aspect was seeing users interact with blockchain functionality without requiring complex wallet setup or seed phrase management. This truly demonstrates that web3 UX doesn't have to suck when built on Stellar.
 
 ## Contributing
 
-We welcome contributions to the Stellar Consensus News project. Please see our contributing guidelines for more information.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgments
+## Acknowledgements
 
-Stellar Consensus News is being developed for the Stellar Consensus Hackathon 2025, targeting the "Web3 UX doesn't have to suck" challenge.
+- The Stellar Development Foundation for their amazing tools and documentation
+- The Consensus Toronto 2025 Hackathon for the opportunity to build this project
