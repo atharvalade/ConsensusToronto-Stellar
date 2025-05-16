@@ -73,7 +73,7 @@ const ConnectWalletButton = () => {
       {walletConnected ? (
         <div className="flex items-center gap-3">
           <button
-            className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-200 flex items-center gap-2"
+            className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded transition-all duration-200 flex items-center gap-2"
             onClick={() => setShowDropdown(!showDropdown)}
           >
             <span className="hidden sm:inline">Connected:</span> {formatAddress(walletAddress)}
@@ -100,7 +100,7 @@ const ConnectWalletButton = () => {
         </div>
       ) : (
         <button
-          className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-200 flex items-center gap-2"
+          className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded transition-all duration-200 flex items-center gap-2"
           onClick={handleConnect}
           disabled={isConnecting}
         >
