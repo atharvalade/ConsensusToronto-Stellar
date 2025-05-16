@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
 import StellarSdk from '@stellar/stellar-sdk';
+import { config } from '../config/env';
 
 // Setup Stellar connection based on environment
-const isTestnet = process.env.STELLAR_NETWORK === 'TESTNET';
+const isTestnet = config.stellarNetwork === 'TESTNET';
 const server = new StellarSdk.Server(
-  process.env.STELLAR_HORIZON_URL || 
+  config.stellarHorizonUrl || 
   (isTestnet ? 'https://horizon-testnet.stellar.org' : 'https://horizon.stellar.org')
 );
 const networkPassphrase = isTestnet 
