@@ -1,19 +1,42 @@
-import { Router } from 'express';
-import { 
-  generateRegistrationOptions,
-  verifyRegistration,
-  generateAuthenticationOptions,
-  verifyAuthentication
-} from '../controllers/passkey.controller';
+import { Router, Request, Response } from 'express';
 
 const router = Router();
 
-// Registration routes
-router.post('/register/options', generateRegistrationOptions);
-router.post('/register/verify', verifyRegistration);
+// Import controllers (with dynamic import to avoid circular dependency)
+router.post('/register/options', async (req: Request, res: Response) => {
+  try {
+    const { generateRegistrationOptions } = require('../controllers/passkey.controller');
+    return generateRegistrationOptions(req, res);
+  } catch (error) {
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
-// Authentication routes
-router.post('/login/options', generateAuthenticationOptions);
-router.post('/login/verify', verifyAuthentication);
+router.post('/register/verify', async (req: Request, res: Response) => {
+  try {
+    const { verifyRegistration } = require('../controllers/passkey.controller');
+    return verifyRegistration(req, res);
+  } catch (error) {
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+router.post('/login/options', async (req: Request, res: Response) => {
+  try {
+    const { generateAuthenticationOptions } = require('../controllers/passkey.controller');
+    return generateAuthenticationOptions(req, res);
+  } catch (error) {
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+router.post('/login/verify', async (req: Request, res: Response) => {
+  try {
+    const { verifyAuthentication } = require('../controllers/passkey.controller');
+    return verifyAuthentication(req, res);
+  } catch (error) {
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 export default router; 
