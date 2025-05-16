@@ -5,25 +5,48 @@ import {
   generateAuthenticationOptions as generateAuthOptions,
   verifyAuthenticationResponse
 } from '@simplewebauthn/server';
-import { isoBase64URL } from '@simplewebauthn/server/helpers';
+import { config } from '../config/env';
+
+// Define user interface
+interface User {
+  id: string;
+  username: string;
+  publicKey?: string;
+  currentChallenge?: string;
+  credentials: Array<{
+    id: string;
+    publicKey: string;
+    counter: number;
+  }>;
+}
 
 // In-memory storage for user credentials (replace with database in production)
-const users = new Map<string, {
-  id: string,
-  username: string,
-  publicKey?: string,
-  currentChallenge?: string,
-  credentials: Array<{
-    id: string,
-    publicKey: string,
-    counter: number
-  }>
-}>();
+const users = new Map<string, User>();
 
-// Environment variables (should be loaded from .env)
-const rpName = process.env.RP_NAME || 'Stellar Consensus News';
-const rpID = process.env.RP_ID || 'localhost';
-const rpIcon = process.env.RP_ICON || '';
+// Environment variables
+const rpName = config.rpName;
+const rpID = config.rpId;
+const rpIcon = config.rpIcon;
+
+// Simple Base64URL encoding/decoding functions
+const base64url = {
+  encode: (buffer: Buffer | Uint8Array): string => {
+    if (buffer instanceof Uint8Array) {
+      buffer = Buffer.from(buffer);
+    }
+    return buffer.toString('base64')
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+      .replace(/=/g, '');
+  },
+  decode: (base64url: string): Buffer => {
+    // Add padding if needed
+    const base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
+    const padding = base64.length % 4;
+    const paddedBase64 = padding ? base64 + '='.repeat(4 - padding) : base64;
+    return Buffer.from(paddedBase64, 'base64');
+  }
+};
 
 // Generate registration options
 export const generateRegistrationOptions = async (req: Request, res: Response) => {
@@ -40,8 +63,8 @@ export const generateRegistrationOptions = async (req: Request, res: Response) =
     }
 
     // Create a new user
-    const userId = isoBase64URL.encode(Buffer.from(username));
-    const user = {
+    const userId = base64url.encode(Buffer.from(username));
+    const user: User = {
       id: userId,
       username,
       credentials: []
@@ -109,13 +132,13 @@ export const verifyRegistration = async (req: Request, res: Response) => {
 
     // Store the credential
     user.credentials.push({
-      id: isoBase64URL.encode(credentialID),
-      publicKey: isoBase64URL.encode(credentialPublicKey),
+      id: base64url.encode(credentialID),
+      publicKey: base64url.encode(credentialPublicKey),
       counter
     });
 
     // Store the public key for Stellar account generation
-    user.publicKey = isoBase64URL.encode(credentialPublicKey);
+    user.publicKey = base64url.encode(credentialPublicKey);
 
     // Clear the challenge
     user.currentChallenge = undefined;
@@ -151,7 +174,7 @@ export const generateAuthenticationOptions = async (req: Request, res: Response)
 
     // Get credential IDs
     const allowCredentials = user.credentials.map(cred => ({
-      id: isoBase64URL.decode(cred.id),
+      id: base64url.decode(cred.id),
       type: 'public-key' as const,
     }));
 
@@ -195,7 +218,7 @@ export const verifyAuthentication = async (req: Request, res: Response) => {
     }
 
     // Find the credential
-    const credentialID = isoBase64URL.encode(authenticationResponse.rawId);
+    const credentialID = base64url.encode(authenticationResponse.rawId);
     const credential = user.credentials.find(c => c.id === credentialID);
     if (!credential) {
       return res.status(400).json({ error: 'Credential not found' });
@@ -207,8 +230,8 @@ export const verifyAuthentication = async (req: Request, res: Response) => {
       expectedOrigin: `https://${rpID}`,
       expectedRPID: rpID,
       authenticator: {
-        credentialID: isoBase64URL.decode(credential.id),
-        credentialPublicKey: isoBase64URL.decode(credential.publicKey),
+        credentialID: base64url.decode(credential.id),
+        credentialPublicKey: base64url.decode(credential.publicKey),
         counter: credential.counter,
       }
     });
