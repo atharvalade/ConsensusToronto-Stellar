@@ -1,0 +1,70 @@
+# TrueLens Stellar Project Configuration
+# This file provides information about the TrueLens project and its associated smart contracts
+
+[PROJECT]
+NAME="TrueLens"
+VERSION="1.0.0"
+DESCRIPTION="A decentralized news verification platform built on Stellar"
+DOCUMENTATION="https://github.com/your-username/TrueLens-Stellar/docs/TECHNICAL_DESIGN.md"
+HOMEPAGE="https://truelens-stellar.vercel.app"
+REPOSITORY="https://github.com/your-username/TrueLens-Stellar"
+
+[PROJECT.TEAM]
+NAME="TrueLens Team"
+EMAIL="contact@truelens.io"
+GITHUB="https://github.com/your-username/TrueLens-Stellar"
+
+# Contract information for the Stellar network
+[CONTRACTS.FACTORY]
+ADDRESS="GAJNKGZI23LFE5QXMWVZWHUOFUJV2ZOS3YT4U2T47X6A4QVMHX2SJQ7U"
+DESCRIPTION="Factory contract for creating and managing news verification instances"
+SOURCE_CODE="https://github.com/your-username/TrueLens-Stellar/factory-contract/src/lib.rs"
+
+[CONTRACTS.TOKEN]
+ADDRESS="CDEJSTARK5YTJAK2SKS6NQAAFZTDDXPTXSNVVIWCOXVPBMVCBTNKBUW"
+DESCRIPTION="Token contract for TrueLens (TRUE) token"
+SOURCE_CODE="https://github.com/your-username/TrueLens-Stellar/factory-contract/src/token.rs"
+
+[CONTRACTS.VERIFICATION]
+ADDRESS="CAVKQCR4WAFPPHAXC24GFEKFADUJZQ6V22O3OPS4FSA3IYFEZM6YTRXY"
+DESCRIPTION="Verification contract for news verification"
+SOURCE_CODE="https://github.com/your-username/TrueLens-Stellar/factory-contract/src/verification.rs"
+
+[CONTRACTS.SMART_WALLET]
+ADDRESS="CDF5HGJONOMAJSETQYUWZU7KJ7H4LUJ5AEPXHKAWGTJ3CDIEFL6KAOWY"
+DESCRIPTION="Smart wallet contract for user passkey authentication"
+SOURCE_CODE="https://github.com/your-username/TrueLens-Stellar/factory-contract/src/smart_wallet.rs"
+
+[CONTRACTS.USER_PROFILE]
+ADDRESS="CCHBHWSHJFBEGEUYWN5LPYPWSGUBVZ7Y6KET5FJ4BLF6Z4RNY52NGUMQ"
+DESCRIPTION="User profile contract for managing user profiles and reputation"
+SOURCE_CODE="https://github.com/your-username/TrueLens-Stellar/factory-contract/src/user_profile.rs"
+
+# Deployment information
+[DEPLOYMENT]
+NETWORK="testnet" # or "public" for mainnet
+NETWORK_PASSPHRASE="Test SDF Network ; September 2015"
+HORIZON_URL="https://horizon-testnet.stellar.org"
+SOROBAN_RPC_URL="https://soroban-testnet.stellar.org"
+
+# Token information
+[TOKEN]
+NAME="TrueToken"
+SYMBOL="TRUE"
+DECIMALS=7
+TOTAL_SUPPLY=100000000 # 10 million with 7 decimal places
+ISSUER="CDEJSTARK5YTJAK2SKS6NQAAFZTDDXPTXSNVVIWCOXVPBMVCBTNKBUW"
+DESCRIPTION="The native token of the TrueLens platform, used for staking and rewards"
+
+# Documentation and references
+[DOCUMENTATION]
+TECHNICAL_DESIGN="https://github.com/your-username/TrueLens-Stellar/docs/TECHNICAL_DESIGN.md"
+API_DOCS="https://github.com/your-username/TrueLens-Stellar/docs/API.md"
+USER_GUIDE="https://github.com/your-username/TrueLens-Stellar/docs/USER_GUIDE.md"
+
+# Links to external resources
+[RESOURCES]
+STELLAR_DOCS="https://developers.stellar.org/"
+SOROBAN_DOCS="https://soroban.stellar.org/"
+PASSKEY_KIT="https://github.com/kalepail/passkey-kit"
+LAUNCHTUBE="https://github.com/stellar/launchtube" 
