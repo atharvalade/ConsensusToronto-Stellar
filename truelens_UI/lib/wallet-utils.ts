@@ -1,9 +1,51 @@
 // Stellar wallet interactions with Passkeys integration
+// Mock implementations since the real packages aren't available
+
+// Define a simple mock of PasskeyKit
+class MockPasskeyKit {
+  domain: string;
+  rpName: string;
+  rpIcon: string;
+
+  constructor(options: { domain: string; rpName: string; rpIcon: string }) {
+    this.domain = options.domain;
+    this.rpName = options.rpName;
+    this.rpIcon = options.rpIcon;
+  }
+
+  async register(): Promise<{ publicKey: string }> {
+    // Mock implementation that returns a random Stellar public key
+    const mockPublicKey = 'G' + Array(56).fill(0).map(() => 
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'[Math.floor(Math.random() * 32)]).join('');
+    return { publicKey: mockPublicKey };
+  }
+
+  async getAccount(): Promise<any> {
+    // Mock implementation
+    return { publicKey: 'GABCDEFGHIJKLMNOPQRSTUVWXYZ234567890ABCDEFGHIJKLMNOPQRSTUV' };
+  }
+}
+
+// Mock implementation of Stellar SDK's Server
+class MockStellarServer {
+  url: string;
+  
+  constructor(url: string) {
+    this.url = url;
+  }
+
+  // Add any mock methods you need here
+}
 
 // Constants
 export const STELLAR_TESTNET = "testnet";
 export const STELLAR_PUBLIC_NETWORK = "public";
 export const CURRENT_NETWORK = STELLAR_TESTNET;
+
+// Configure mock Stellar SDK based on network
+const server = CURRENT_NETWORK === STELLAR_TESTNET
+  ? new MockStellarServer('https://horizon-testnet.stellar.org')
+  : new MockStellarServer('https://horizon.stellar.org');
 
 // Interface for Stellar account
 export interface StellarAccount {
@@ -12,14 +54,20 @@ export interface StellarAccount {
   isActive: boolean;
 }
 
-// Mock implementation of Stellar Passkey authentication
+// Initialize mock PasskeyKit
+const passkeyKit = new MockPasskeyKit({
+  domain: typeof window !== 'undefined' ? window.location.hostname : 'localhost',
+  rpName: 'Stellar Consensus News',
+  rpIcon: '/NewTrueLens.svg'
+});
+
+// Connect wallet with Stellar Passkeys
 export const connectWallet = async (checkOnly: boolean = false): Promise<string | null> => {
-  // This is a mock implementation - in a real app, this would use the Stellar Passkey Kit
-  // https://github.com/kalepail/passkey-kit
+  // This implementation uses mock functions instead of the real Stellar Passkey Kit
   
   if (checkOnly) {
     // Just check if there's a connected account and return its address
-    const savedAccount = localStorage.getItem('stellar_account');
+    const savedAccount = localStorage?.getItem('stellar_account');
     if (savedAccount) {
       try {
         const account = JSON.parse(savedAccount) as StellarAccount;
@@ -35,13 +83,12 @@ export const connectWallet = async (checkOnly: boolean = false): Promise<string 
   try {
     if (typeof window === 'undefined') return null;
     
-    // In a real app, this would integrate with the Passkey Kit to create or use an existing Passkey
-    // For this mock, we'll simulate the authentication flow with a delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // In a real app, this would create or use an existing Passkey
+    // For demo purposes, we're using a mock implementation
     
-    // Generate a mock Stellar public key
-    const mockPublicKey = 'G' + Array(56).fill(0).map(() => 
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'[Math.floor(Math.random() * 32)]).join('');
+    // Creating a new Passkey account or retrieving existing one
+    const mockResult = await passkeyKit.register();
+    const mockPublicKey = mockResult.publicKey;
     
     const account: StellarAccount = {
       publicKey: mockPublicKey,
@@ -49,10 +96,10 @@ export const connectWallet = async (checkOnly: boolean = false): Promise<string 
       isActive: true
     };
     
-    // Store the mock account
-    localStorage.setItem('stellar_account', JSON.stringify(account));
+    // Store the account
+    localStorage?.setItem('stellar_account', JSON.stringify(account));
     
-    return mockPublicKey;
+    return account.publicKey;
   } catch (error) {
     console.error("Error connecting with Stellar Passkey", error);
     return null;
@@ -63,7 +110,7 @@ export const connectWallet = async (checkOnly: boolean = false): Promise<string 
 export const isWalletConnected = async (): Promise<boolean> => {
   if (typeof window === 'undefined') return false;
   
-  const savedAccount = localStorage.getItem('stellar_account');
+  const savedAccount = localStorage?.getItem('stellar_account');
   if (!savedAccount) return false;
   
   try {
@@ -75,7 +122,7 @@ export const isWalletConnected = async (): Promise<boolean> => {
   }
 };
 
-// Mock function to verify news using Stellar smart contracts
+// Function to verify news using Stellar smart contracts
 export const verifyNewsOnStellar = async (
   newsId: number,
   choice: 'verify' | 'flag',
@@ -97,11 +144,11 @@ export const verifyNewsOnStellar = async (
       return { success: false };
     }
     
-    // In a real app, this would use the Stellar SDK to call a smart contract
-    // For this mock, we'll simulate the verification process
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    // In a real app, this would use the Stellar SDK to call a smart contract via Launchtube
+    // For demo purposes, we'll simulate the verification process
     
-    // Mock transaction hash
+    // Mock transaction for demo
+    await new Promise(resolve => setTimeout(resolve, 2000));
     const mockTxHash = 'T' + Array(64).fill(0).map(() => 
       '0123456789ABCDEF'[Math.floor(Math.random() * 16)]).join('');
     
@@ -116,7 +163,7 @@ export const verifyNewsOnStellar = async (
   }
 };
 
-// Mock function to stake XLM tokens
+// Function to stake XLM tokens
 export const stakeXLM = async (amount: number): Promise<{success: boolean, hash?: string}> => {
   try {
     // Check if wallet is connected
@@ -126,11 +173,11 @@ export const stakeXLM = async (amount: number): Promise<{success: boolean, hash?
       return { success: false };
     }
     
-    // In a real app, this would use the Stellar SDK to stake tokens
-    // For this mock, we'll simulate the staking process
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    // In a real app, this would use the Stellar SDK to stake tokens via Launchtube
+    // For demo purposes, we'll simulate the staking process
     
-    // Mock transaction hash
+    // Mock transaction for demo
+    await new Promise(resolve => setTimeout(resolve, 1500));
     const mockTxHash = 'T' + Array(64).fill(0).map(() => 
       '0123456789ABCDEF'[Math.floor(Math.random() * 16)]).join('');
     
