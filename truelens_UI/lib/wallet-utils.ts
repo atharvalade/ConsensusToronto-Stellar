@@ -189,4 +189,19 @@ export const stakeXLM = async (amount: number): Promise<{success: boolean, hash?
     console.error("Error staking XLM:", error);
     return { success: false };
   }
+};
+
+// Function to disconnect wallet / logout
+export const disconnectWallet = async (): Promise<boolean> => {
+  try {
+    if (typeof window === 'undefined') return false;
+    
+    // Remove the stored account
+    localStorage?.removeItem('stellar_account');
+    
+    return true;
+  } catch (error) {
+    console.error("Error disconnecting Stellar account:", error);
+    return false;
+  }
 }; 
