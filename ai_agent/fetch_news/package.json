@@ -1,0 +1,14 @@
+{
+  "name": "news-fetcher",
+  "version": "1.0.0",
+  "description": "Fetches and processes news articles using Gemini AI",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@google/genai": "^0.14.1"
+  }
+} 
