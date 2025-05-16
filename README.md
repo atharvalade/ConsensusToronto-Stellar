@@ -4,6 +4,9 @@ A decentralized news verification platform built on Stellar, leveraging passkeys
 
 Website: [Stellar Developers](https://developers.stellar.org/)
 
+Video: https://youtu.be/3FeXS61Y6zc
+
+
 ## Features Implemented
 
 - **Passkey-Based Authentication**: Users can create and connect wallets using device biometrics (Face ID, Touch ID, etc.)
